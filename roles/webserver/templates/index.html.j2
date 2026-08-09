@@ -1,0 +1,13 @@
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>{{ site_name }}</title>
+</head>
+<body>
+    <h1>{{ site_name }}</h1>
+    <p>Servidor: <b>{{ ansible_hostname }}</b></p>
+    <p>IP: {{ ansible_default_ipv4.address }}</p>
+    <p>Puerto: {{ host_port }}</p>
+    <small>Generado con Ansible</small>
+</body>
+</html>

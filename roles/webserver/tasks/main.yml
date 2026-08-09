@@ -1,0 +1,17 @@
+---
+- name: Instalar Nginx en AlmaLinux
+  ansible.builtin.dnf:
+    name: nginx
+    state: present
+    update_cache: false
+    sslverify: false
+- name: Levantar el servicio Nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+- name: Renderizar index.html
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /usr/share/nginx/html/index.html
+  notify: restart nginx
