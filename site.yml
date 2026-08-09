@@ -1,0 +1,11 @@
+---
+- hosts: web
+  become: true
+  roles:
+    - webserver
+    - firewall
+
+- hosts: db
+  become: true
+  roles:
+    - firewall
