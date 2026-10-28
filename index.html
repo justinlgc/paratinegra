@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Feliz cumpleaños</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#1a1022; --plum:#2b1a35; --rose:#d9a89a; --gold:#e8cfa0; --ivory:#f6eee6; --mute:#b9a9bd;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:radial-gradient(120% 90% at 50% 0%,var(--plum),var(--night) 70%) fixed;color:var(--ivory);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+body.locked{overflow:hidden;height:100%}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+
+/* Puerta de entrada */
+#gate{position:fixed;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;text-align:center;padding:2rem;
+  transition:opacity 1.4s ease,transform 1.6s cubic-bezier(.2,.7,.2,1),filter 1.4s ease}
+#gate.out{opacity:0;transform:scale(1.12);filter:blur(14px);pointer-events:none}
+#gate h1{font:italic 300 clamp(1.5rem,5vw,2.1rem)/1.3 var(--serif);margin:0;color:var(--gold);letter-spacing:.02em}
+.seal{position:relative;width:min(240px,66vw);aspect-ratio:1}
+.seal svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.seal circle{fill:none;stroke-width:1.5}
+.track{stroke:rgba(232,207,160,.2)}
+.fill{stroke:var(--gold);stroke-linecap:round;stroke-dasharray:628.3;stroke-dashoffset:628.3;transition:stroke-dashoffset .6s cubic-bezier(.3,.8,.3,1);filter:drop-shadow(0 0 6px rgba(232,207,160,.7))}
+#tap{position:absolute;inset:11%;border-radius:50%;border:0;cursor:pointer;color:var(--night);
+  background:radial-gradient(circle at 35% 30%,#f6dfd2,var(--rose) 55%,#b9807a);
+  font:italic 500 clamp(1.25rem,5vw,1.6rem)/1.1 var(--serif);padding:0 .5rem;box-shadow:0 10px 40px rgba(217,168,154,.35),inset 0 -6px 16px rgba(120,60,70,.25);
+  animation:breathe 3.2s ease-in-out infinite;-webkit-tap-highlight-color:transparent;transition:transform .15s}
+#tap:active{transform:scale(.92)}
+#tap:focus-visible{outline:2px solid var(--ivory);outline-offset:6px}
+#tap.hit{animation:pop .45s ease}
+@keyframes breathe{50%{transform:scale(1.04);box-shadow:0 14px 56px rgba(217,168,154,.5),inset 0 -6px 16px rgba(120,60,70,.25)}}
+@keyframes pop{40%{transform:scale(1.14)}}
+#hint{margin:0;color:var(--mute);font-size:.95rem;min-height:1.7em;transition:opacity .3s}
+
+/* Contenido */
+main{position:relative;z-index:2;max-width:640px;margin:0 auto;padding:12vh 1.6rem 6rem;visibility:hidden}
+main.in{visibility:visible}
+.hero{text-align:center;min-height:78vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.hero small{font-size:1rem;color:var(--gold);letter-spacing:.08em}
+.name{font:300 clamp(3.4rem,17vw,6.6rem)/1 var(--serif);margin:.4rem 0 1rem;display:flex;flex-wrap:wrap;justify-content:center}
+.name span{display:inline-block;opacity:0;transform:translateY(.5em) scale(.9);filter:blur(10px)}
+main.in .name span{animation:letter 1.2s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*.12s + .5s)}
+@keyframes letter{to{opacity:1;transform:none;filter:none}}
+.lead{font:italic 300 clamp(1.25rem,4.5vw,1.6rem)/1.5 var(--serif);max-width:26em;margin:0;color:var(--ivory);opacity:0}
+main.in .lead{animation:fade 1.6s ease forwards;animation-delay:2.2s}
+.rule{width:1px;height:64px;background:linear-gradient(var(--gold),transparent);margin:2.4rem auto 0;opacity:0}
+main.in .rule{animation:fade 1.6s ease forwards;animation-delay:3s}
+@keyframes fade{to{opacity:1}}
+
+h2{font:500 clamp(1.8rem,6vw,2.4rem)/1.2 var(--serif);margin:5rem 0 1.4rem;color:var(--gold)}
+p{margin:0 0 1.2rem}
+.mail{text-align:center}
+.env{position:relative;display:block;width:min(340px,86vw);height:min(220px,56vw);margin:3.4rem auto 0;padding:0;border:0;background:none;cursor:pointer;perspective:900px;-webkit-tap-highlight-color:transparent;color:inherit}
+.env:focus-visible{outline:2px solid var(--gold);outline-offset:10px}
+.env span{position:absolute;display:block}
+.eb{inset:0;background:#4a2c52;border-radius:6px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.note{left:7%;right:7%;top:8%;bottom:8%;background:var(--ivory);border-radius:3px;z-index:2;transition:transform 1s cubic-bezier(.3,.8,.3,1) .7s}
+.ef{inset:0;z-index:3;background:#5d3a66;clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);border-radius:6px}
+.flap{left:0;right:0;top:0;height:58%;z-index:4;background:#7a4a84;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .8s ease,z-index 0s .4s}
+.seal2{left:50%;top:44%;transform:translate(-50%,-50%);z-index:5;color:var(--rose);font-size:1.5rem;line-height:1;transition:opacity .4s;animation:breathe 3.2s ease-in-out infinite}
+.tip{left:0;right:0;bottom:-2.4rem;font:italic 300 1.15rem var(--serif);color:var(--gold);transition:opacity .4s}
+.env.open .flap{transform:rotateX(180deg);z-index:1}
+.env.open .note{transform:translateY(-64%)}
+.env.open .seal2,.env.open .tip{opacity:0}
+.wrap{display:grid;grid-template-rows:0fr;margin-top:3.6rem;transition:grid-template-rows 1.6s ease 1.7s}
+.wrap.show{grid-template-rows:1fr}
+.clip{overflow:hidden;min-height:0;padding:0 .4rem}
+.paper{background:var(--ivory);color:#3a2540;text-align:left;border-radius:4px;padding:2.2rem 1.8rem 1.6rem;margin-bottom:1rem;box-shadow:0 20px 50px rgba(0,0,0,.4);font:italic 400 clamp(1.25rem,4.4vw,1.5rem)/1.65 var(--serif)}
+.paper p{margin:0 0 1.1rem;opacity:0;transform:translateY(8px);transition:opacity 1s ease,transform 1s ease;transition-delay:calc(2.8s + var(--k)*.9s)}
+.wrap.show .paper p{opacity:1;transform:none}
+.paper .sig{text-align:right;color:#7a4a84}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:4rem 0 0;align-items:start}
+.gallery figure{margin:0}
+.gallery figure:nth-child(even){margin-top:2.6rem}
+.frame{aspect-ratio:3/4;padding:7px;border:1px solid rgba(232,207,160,.5);border-radius:3px}
+.frame .img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.4rem;text-align:center;background:linear-gradient(160deg,#4a2c52,#2b1a35 60%,#6a4268);color:var(--gold);font:italic 300 1rem/1.3 var(--serif)}
+.frame .img b{font-size:1.8rem;font-weight:400;color:var(--rose)}
+.frame img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery figcaption{margin-top:.6rem;font:italic 300 1rem var(--serif);color:var(--mute);text-align:center}
+blockquote{margin:5rem 0 0;padding:2.4rem 0;border-top:1px solid rgba(232,207,160,.25);border-bottom:1px solid rgba(232,207,160,.25);text-align:center;font:italic 300 clamp(1.4rem,5vw,1.9rem)/1.5 var(--serif)}
+blockquote cite{display:block;margin-top:1rem;font:300 1rem var(--sans);font-style:normal;color:var(--gold)}
+footer{text-align:center;margin-top:4rem;color:var(--mute);font-size:.9rem}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+  .name span,.lead,.rule{opacity:1;transform:none;filter:none}
+}
+</style>
+</head>
+<body class="locked">
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<section id="gate" aria-label="Entrada">
+  <h1 id="title">Hay una sorpresa para ti</h1>
+  <div class="seal">
+    <svg viewBox="0 0 220 220" aria-hidden="true"><circle class="track" cx="110" cy="110" r="100"/><circle class="fill" id="fill" cx="110" cy="110" r="100"/></svg>
+    <button id="tap" type="button" aria-describedby="hint">Toca</button>
+  </div>
+  <p id="hint" aria-live="polite"></p>
+</section>
+
+<main id="page">
+  <header class="hero">
+    <small>Hoy es un día especial</small>
+    <div class="name" id="name" aria-label="Valentina"></div>
+    <p class="lead">Feliz cumpleaños, mi amor. Estas palabras son solo para ti.</p>
+    <div class="rule"></div>
+  </header>
+
+  <h2>Para ti</h2>
+  <p>Contigo, hasta los días comunes se sienten distintos. Gracias por tu risa, por tu paciencia y por quedarte cuando más lo necesité.</p>
+  <p>Hoy no hay regalo que alcance, así que te dejo lo que sí tengo: lo que siento, con mis propias palabras.</p>
+
+  <div class="gallery" id="gallery"></div>
+
+  <section class="mail">
+    <h2>Una carta para ti</h2>
+    <button class="env" id="env" type="button" aria-expanded="false" aria-controls="letter" aria-label="Abrir la carta">
+      <span class="eb"></span><span class="note"></span><span class="ef"></span><span class="flap"></span><span class="seal2">♥</span><span class="tip">Toca para abrirla</span>
+    </button>
+    <div class="wrap" id="letter"><div class="clip"><div class="paper">
+      <p style="--k:0">Mi amor:</p>
+      <p style="--k:1">Quise detenerme un momento para decirte lo que a veces se me queda guardado en el pecho.</p>
+      <p style="--k:2">Gracias por cuidarme, por reírte de mis chistes malos y por convertir lo simple en algo que vale la pena.</p>
+      <p style="--k:3">Contigo aprendí que el amor es una decisión tranquila que se repite cada mañana, y yo te elijo otra vez hoy.</p>
+      <p style="--k:4">Que este nuevo año te devuelva todo lo que das, y que yo esté a tu lado para verlo.</p>
+      <p style="--k:5">Feliz cumpleaños. Te amo.</p>
+      <p class="sig" style="--k:6">Att: Jesús</p>
+    </div></div></div>
+  </section>
+
+  <blockquote>“Que este nuevo año te encuentre más feliz que nunca.”<cite>Con amor, Jesús</cite></blockquote>
+  <footer>Hecho con amor, solo para ti.</footer>
+</main>
+
+<script>
+(function(){
+  var CFG={nombre:'Mi Negra',toques:7};
+  /* Fotos: poner la imagen en src (data URI). Vacío muestra un marco de ejemplo. */
+  var PHOTOS=[{src:'1.jpg'},{src:'3.jpg'},{src:'4.jpg'},{src:'5.jpg'}];
+  var gal=document.getElementById('gallery');
+  PHOTOS.forEach(function(p){
+    var f=document.createElement('figure'),fr=document.createElement('div'),c=document.createElement('figcaption');
+    fr.className='frame';
+    if(p.src){var im=new Image();im.src=p.src;im.alt=p.cap;fr.appendChild(im)}
+    else{var d=document.createElement('div');d.className='img';d.innerHTML='<b>♥</b><span>Aquí irá una foto</span>';fr.appendChild(d)}
+    c.textContent=p.cap;f.appendChild(fr);f.appendChild(c);gal.appendChild(f);
+  });
+  var gate=document.getElementById('gate'),btn=document.getElementById('tap'),fill=document.getElementById('fill'),
+      hint=document.getElementById('hint'),page=document.getElementById('page'),nameEl=document.getElementById('name');
+  var cv=document.getElementById('fx'),ctx=cv.getContext('2d'),W,H,dpr=Math.min(devicePixelRatio||1,2),ps=[];
+  var msgs=['¿Lista? Toca el círculo','Algo se está moviendo…','Casi, casi…','Ya siento que se abre','No pares ahora','Una última vez'];
+  var labels=['¡Otra vez!','¡Más!','¡Ya casi!','¡Sigue!','¡Ábrete!','¡Uno más!'];
+  var n=0,done=false;
+
+  nameEl.setAttribute('aria-label',CFG.nombre);
+  CFG.nombre.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c;s.style.setProperty('--i',i);s.setAttribute('aria-hidden','true');nameEl.appendChild(s)});
+  document.title='Feliz cumpleaños, '+CFG.nombre;
+
+  function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+  addEventListener('resize',size);size();
+
+  function mote(x,y,burst){
+    var a=Math.random()*Math.PI*2,v=burst?1.5+Math.random()*4:.1+Math.random()*.3;
+    ps.push({x:x,y:y,vx:Math.cos(a)*v,vy:burst?Math.sin(a)*v:-(.15+Math.random()*.35),r:burst?1+Math.random()*2.2:.6+Math.random()*1.6,
+      life:1,d:burst?.014+Math.random()*.014:.0015+Math.random()*.002,c:Math.random()<.5?'232,207,160':'217,168,154'});
+  }
+  for(var i=0;i<46;i++){mote(Math.random()*W,Math.random()*H,false);ps[i].life=Math.random()}
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    if(ps.length<70&&Math.random()<.25)mote(Math.random()*W,H+10,false);
+    for(var i=ps.length-1;i>=0;i--){
+      var p=ps[i];p.x+=p.vx;p.y+=p.vy;p.vx*=.985;if(p.life<=1&&p.d>.01)p.vy+=.04;p.life-=p.d;
+      if(p.life<=0||p.y<-20){ps.splice(i,1);continue}
+      ctx.globalAlpha=Math.max(0,Math.min(1,p.life))*.85;ctx.fillStyle='rgba('+p.c+',1)';
+      ctx.shadowColor='rgba('+p.c+',.9)';ctx.shadowBlur=8;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fill();
+    }
+    ctx.globalAlpha=1;requestAnimationFrame(frame);
+  }
+  frame();
+
+  function setHint(t){hint.style.opacity=0;setTimeout(function(){hint.textContent=t;hint.style.opacity=1},180)}
+  hint.textContent=msgs[0];
+
+  btn.addEventListener('click',function(){
+    if(done)return;
+    n++;
+    var r=btn.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    for(var i=0;i<(n===CFG.toques?90:22);i++)mote(cx,cy,true);
+    btn.classList.remove('hit');void btn.offsetWidth;btn.classList.add('hit');
+    if(navigator.vibrate)try{navigator.vibrate(n===CFG.toques?[40,30,80]:18)}catch(e){}
+    fill.style.strokeDashoffset=628.3*(1-n/CFG.toques);
+    var left=CFG.toques-n;
+    if(left>0){
+      btn.textContent=labels[Math.min(n-1,labels.length-1)];
+      setHint(left===1?msgs[5]:msgs[Math.min(n,4)]);
+    }else{
+      done=true;btn.textContent='♥';btn.disabled=true;setHint('Bienvenida');
+      setTimeout(open,900);
+    }
+  });
+
+  function open(){
+    gate.classList.add('out');
+    page.classList.add('in');
+    document.body.classList.remove('locked');
+    scrollTo(0,0);
+    setTimeout(function(){gate.style.display='none'},1700);
+  }
+
+  var env=document.getElementById('env'),wrap=document.getElementById('letter');
+  env.addEventListener('click',function(){
+    if(env.classList.contains('open'))return;
+    env.classList.add('open');env.setAttribute('aria-expanded','true');wrap.classList.add('show');
+    var r=env.getBoundingClientRect();
+    for(var i=0;i<40;i++)mote(r.left+r.width/2,r.top+r.height/2,true);
+    setTimeout(function(){wrap.scrollIntoView({behavior:'smooth',block:'center'})},2600);
+  });
+})();
+</script>
+</body>
+</html>
